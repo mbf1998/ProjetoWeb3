@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Criar produto</title>
+    </h:head>
+    <h:body>
+         <b:growl id="gro" delay="4000"/>
+         <b:navBar brand="Bem vindo #{loginController.admLogado.nome}" brandHref="indexAdm.xhtml" inverse="true">
+  <b:navbarLinks>
+    <b:navLink icon-awesome="fa-home" value="Início" href="indexAdm.xhtml"></b:navLink>
+    <b:navLink icon-awesome="fa-list" value="Pedidos" href="pedidosAdm.xhtml"></b:navLink>
+      <b:dropMenu value="Criar" iconAwesome="fa-plus">
+      <b:navLink value= "Tipo de produto" href="criartipoproduto.xhtml"></b:navLink>
+      <b:navLink value="Cor do produto" href="criarcorproduto.xhtml"></b:navLink>
+      <b:navLink value="Tamanho do produto" href="criartamanhoproduto.xhtml"></b:navLink>
+      <b:navLink value="Produto" href="criarproduto.xhtml"></b:navLink></b:dropMenu>
+        
+      <b:navLink iconAwesome="fa-close" style="margin-left: 320px;" value="Sair" href="login.xhtml"></b:navLink>
+                   
+    </b:navbarLinks>  
+</b:navBar>
+         <h:form id="formProduto">
+             <b:panel look="primary" title="Informações do produto">
+                 <b:panelGrid columns="2">
+                      <h:outputText value="Nome do produto"/>
+                      <b:inputText id="txtNomeprod" value="#{produtoController.produtoCadastro.nome}" 
+                                 required="true" maxlength="100"
+                                 required-message="O nome é obrigatório"/>
+                    <b:message for="txtNomeprod"/> <br/>
+                     <h:outputText value="Descrição do produto"/>
+                     <b:inputText id="txtDescricao" value="#{produtoController.produtoCadastro.descricao}" 
+                                 required="true" maxlength="300"
+                                 required-message="A descrição é obrigatória"/>
+                    <b:message for="txtDescricao"/> <br/>
+                     <h:outputText value="Preço do produto"/>
+                     <b:inputText id="txtPreco" value="#{produtoController.produtoCadastro.preco}" 
+                                 required="true"
+                                 required-message="O preço é obrigatório"/>
+                    <b:message for="txtPreco"/> <br/>
+                     <h:outputText value="Quantidade do produto"/>
+                     <b:inputText id="txtQuantidade" value="#{produtoController.produtoCadastro.quantidade}" 
+                                 required="true" 
+                                 required-message="A quantidade é obrigatória"/>
+                    <b:message for="txtQuantidade"/> <br/>
+              
+                    <h:outputText value="Cor do produto"/>
+                    <b:selectOneMenu value="#{produtoController.cor}">
+                        <f:selectItems value="#{corController.lertudo()}" var="c" itemValue="#{c.id}" itemLabel="#{c.nome}"/>
+                    </b:selectOneMenu>
+                    
+                   <h:outputText value="Tipo do produto"/>
+                   <b:selectOneMenu value="#{produtoController.tip}">
+                       <f:selectItems value="#{tipoprodutocontroller.lerTudoTipoProduto()}" var="t" itemValue="#{t.id}" itemLabel="#{t.nome}"/>
+                    </b:selectOneMenu>
+                   
+                   <h:outputText value="Tamanho do produto"/>
+                   <b:selectOneMenu value="#{produtoController.tam}">
+                       <f:selectItems value="#{tamanhoController.lertudo()}" var="tam" itemValue="#{tam.id}" itemLabel="#{tam.nome}"/>
+                    </b:selectOneMenu>
+                    <h:outputText value="Imagem do produto"/>
+                    <p:fileUpload value="#{produtoController.produtoCadastro.imagemProduto}" mode="simple"/>
+
+                  </b:panelGrid>
+                
+             </b:panel>
+          
+          <b:commandButton look="primary" style="margin-left: 590px; margin-bottom: 15px;" value="Registrar" action="#{produtoController.inserir()}"
+                           update="@form :gro"/></h:form>
+    </h:body>
+</html>
+

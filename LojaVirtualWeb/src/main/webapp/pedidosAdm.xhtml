@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Pedidos</title>
+    </h:head>
+    <h:body>
+            <p:growl id="gro" life="3000"/>
+        <b:navBar brand="Bem vindo #{loginController.admLogado.nome}" brandHref="indexAdm.xhtml" inverse="true">
+  <b:navbarLinks>
+    <b:navLink icon-awesome="fa-home" value="Início" href="indexAdm.xhtml"></b:navLink>
+    <b:navLink icon-awesome="fa-list" value="Pedidos" href="pedidosAdm.xhtml"></b:navLink>
+      <b:dropMenu value="Criar" iconAwesome="fa-plus">
+      <b:navLink value= "Tipo de produto" href="criartipoproduto.xhtml"></b:navLink>
+      <b:navLink value="Cor do produto" href="criarcorproduto.xhtml"></b:navLink>
+      <b:navLink value="Tamanho do produto" href="criartamanhoproduto.xhtml"></b:navLink>
+      <b:navLink value="Produto" href="criarproduto.xhtml"></b:navLink></b:dropMenu>
+        
+      <b:navLink iconAwesome="fa-close" style="margin-left: 320px;" value="Sair" href="#"></b:navLink>
+                   
+    </b:navbarLinks>  
+</b:navBar>
+       <br/><br/>
+     
+          <b:panel look="primary" title="Informações dos pedidos">
+           <h:form id="formped">
+           
+               <b:dataTable value="#{pedidocontroller.lertudo()}" 
+           var="c">
+    <b:dataTableColumn value="#{c.status}"/>     
+    <b:dataTableColumn value="#{c.log}" />
+    <b:dataTableColumn value="#{c.quantidade}" />
+    <b:dataTableColumn label="Nome do produto" value="#{c.produto.nome}" />
+    
+    <b:dataTableColumn label="Operação"  >
+        <b:commandButton icon="pencil" oncomplete="$('#modalUpdate').modal('show')"
+                                     update=":modalUpdate:formModal">
+                        <f:setPropertyActionListener value="#{c}" 
+                                                     target="#{pedidocontroller.selped}"/>
+                    </b:commandButton>
+        <b:commandButton title="Deletar" icon="glyphicon-trash" action="#{pedidocontroller.delete()}"
+                                     update="@form">
+        <p:confirm message="Deseja realmente deletar este registro" />
+        <f:setPropertyActionListener target="#{pedidocontroller.selped}"
+                                                     value="#{c}"/>
+        </b:commandButton>
+         <b:commandButton title="Executar" icon="glyphicon-ok" action="#{pedidocontroller.atualizarStatus()}"
+                                     update="@form">
+       <f:setPropertyActionListener target="#{pedidocontroller.selped}"
+                                                     value="#{c}"/>
+        </b:commandButton>
+         <b:commandButton title="Enviado" icon="glyphicon-plane" action="#{pedidocontroller.atualizarStatusEnviado()}"
+                                     update="@form">
+       <f:setPropertyActionListener target="#{pedidocontroller.selped}"
+                                                     value="#{c}"/>
+        </b:commandButton>
+    </b:dataTableColumn>
+   
+  </b:dataTable>
+        
+          
+       </h:form> 
+             <b:modal id="modalUpdate" title="Editar Informações do pedido">
+            <b:form id="formModal">
+                <b:panelGrid columns="2">
+                    <h:outputText value="Quantidade"/>
+                    <h:inputText value="#{pedidocontroller.selped.quantidade}"/>
+                   
+                
+                </b:panelGrid><br/>
+                <b:commandButton value="alterar" look="primary" action="#{pedidocontroller.update()}"
+                                 update=":formped :gro" 
+                                 oncomplete="$('#modalUpdate').modal('hide')"/>
+                <b:button value="cancelar" onclick="$('#modalUpdate').modal('hide')"/>
+            </b:form>
+        </b:modal>
+          </b:panel>
+       <br/><br/>
+    </h:body>
+</html>
+

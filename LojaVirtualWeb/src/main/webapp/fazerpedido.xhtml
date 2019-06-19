@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Fazer pedido</title>
+    </h:head>
+    <h:body>
+         <b:navBar brand="Bem vindo #{loginController.clienteLogado.nome}" brandHref="indexCliente.xhtml" inverse="true">
+  <b:navbarLinks>
+    <b:navLink icon-awesome="fa-home" value="Início" href="indexCliente.xhtml"></b:navLink>
+    <b:navLink icon-awesome="fa-list" value="Meus pedidos" href="meusPedidos.xhtml"></b:navLink>
+
+    <b:navLink icon-awesome="fa-cart-plus" value="Fazer pedido" href="fazerpedido.xhtml"></b:navLink>
+    <b:navLink iconAwesome="fa-close" style="margin-left: 200px;" value="Sair" href="login.xhtml"></b:navLink>
+  </b:navbarLinks>
+</b:navBar>
+
+        <b:growl id="gro" delay="4000"/>
+        <h:form id="formpedido">
+            <b:panel look="success" title="Meu pedido">
+                <b:panelGrid columns="2">
+                    <h:outputText value="Produto"/>
+                    <b:selectOneMenu value="#{pedidocontroller.pedidoCadastro.produto}">
+                        <f:selectItems value="#{produtoController.lerTudo()}" var="produto" itemValue="#{produto}" itemLabel="#{produto.nome}"/>
+                    </b:selectOneMenu>
+                    <h:outputText value="Quantidade"/>
+                    <b:inputText id="txtq" value="#{pedidocontroller.pedidoCadastro.quantidade}" 
+                                  required="true"
+                                  required-message="A quantidade é obrigatório" />
+                    <b:message for="txtq"/><br/>
+                   <b:commandButton look="primary" style="margin-left: 590px; margin-top: 15px;" value="Registrar" action="#{pedidocontroller.inserir()}"
+                             update="@form :gro"/>
+            
+                </b:panelGrid>
+            </b:panel>
+        </h:form>
+    </h:body>
+</html>
+

@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Meus pedidos</title>
+    </h:head>
+    <h:body>
+        <p:growl id="gro" life="3000"/>
+  <b:navBar brand="Bem vindo Fulano" brandHref="indexCliente.xhtml" inverse="true">
+  <b:navbarLinks>
+    <b:navLink icon-awesome="fa-home" value="Início" href="indexCliente.xhtml"></b:navLink>
+    <b:navLink icon-awesome="fa-list" value="Meus pedidos" href="meusPedidos.xhtml"></b:navLink>
+    <b:navLink icon-awesome="fa-edit" value="Editar perfil" href="editarPerfil.xhtml"></b:navLink>
+    <b:navLink icon-awesome="fa-cart-plus" value="Meu carrinho" href="meuCarrinho.xhtml"></b:navLink>
+    <b:navLink iconAwesome="fa-close" style="margin-left: 200px;" value="Sair" href="#"></b:navLink>
+  </b:navbarLinks>
+</b:navBar>
+        <br/><br/>
+        <h:form id="formMeusPedidos">
+           
+            <c:forEach begin="0" end="2" var="a">
+                
+                <b:panel look="primary" title="#logdoPedido" style="width: 50%; margin-left: 25%">
+                    <b:panelGrid columns="1" style="width: 50%">
+                        <h:outputText style="margin-left: 90%" value="Id:"/>
+                        <h:inputText style="margin-left: 78%; width: 50%"  value="id" disabled="true"/>
+                        <h:outputText style="margin-left: 90%" value="Log:"/>
+                        <h:inputText style="margin-left: 78%; width: 50%"  value="log" disabled="true"/>
+                        <h:outputText style="margin-left: 90%" value="Status:"/>
+                        <h:inputText style="margin-left: 78%; width: 50%"  value="status" disabled="true"/>
+                       
+                        <h:outputText style="margin-left: 90%" value="Quantidade:"/>
+                        <h:inputText style="margin-left: 78%; width: 50%"  value="1000" disabled="true"/><br/>
+                        <h:outputText style="margin-left: 90%" value="Produtos:"/>
+                       
+                        <c:forEach begin="0" end="3" var="produto">
+                            <b:panel look="success" title="#produto.nome}" style="width:150%; margin-left: 20%;margin-top: 10px">
+                                <b:panelGrid columns="1" style="width: 90%">
+                        <h:outputText style="margin-left: 55%;margin-top: 5%; margin-bottom: 5%;" value="Id:"/>
+                         <h:inputText style="width: 50%; margin-left: 35%"  value="id" disabled="true"/>
+                        <h:outputText style="margin-left: 50%" value="Nome:"/>
+                        <h:inputText  style="width: 50%; margin-left: 35%" value="nome do produto" disabled="true"/>
+                        <h:outputText style="margin-left: 45%;margin-top: 5%; margin-bottom: 5%;" value="Tipo do produto:"/>
+                        <h:inputText  style="width: 50%; margin-left: 35%" value="tipo do produto" disabled="true"/>
+                        <h:outputText style="margin-left: 50%;margin-top: 5%; margin-bottom: 5%;" value="Descrição"/>
+                        <b:inputTextarea value="UM MOI DE COISA" style="width: 80%;margin-left: 15%" disabled="true"/>
+                        <h:outputText style="margin-left: 45%;margin-top: 5%; margin-bottom: 5%;" value="Cor do produto:"/>
+                        <c:forEach begin="0" end="2" var="cor"><br/>
+                            <b:panel look="danger" title="#cor.nome}" style="width:100%;margin-top: 10px;margin-left: 10%">
+                                <b:panelGrid columns="1" style="width: 90%">
+                                    <h:outputText style="margin-left: 50%;margin-top: 5%; margin-bottom: 5%;" value="Nome:"/> 
+                                    <h:inputText style="width: 50%; margin-left: 35%" disabled="true" value="nome da cor"/> 
+                                </b:panelGrid>
+                            </b:panel>
+                         
+                        </c:forEach><br/>
+                        <h:outputText style="margin-left: 40%;margin-top: 5%; margin-bottom: 5%;" value="Tamanho do produto:"/>
+                        <c:forEach begin="1" end="3" var="tamanho">
+                            <b:panel look="info" title="#tamanho.nome}" style="width:100%;margin-top: 10px;margin-left: 10%">
+                                <b:panelGrid columns="1" style="width: 90%">
+                                  <h:outputText style="margin-left: 50%;margin-top: 5%; margin-bottom: 5%;" value="Nome:"/> 
+                                  <h:inputText style="width: 50%; margin-left: 35%" value="Nome do tamanho" disabled="true"/>
+                                  <h:outputText style="margin-left: 50%;margin-top: 5%; margin-bottom: 5%;" value="Altura:"/> 
+                                  <h:inputText style="width: 50%; margin-left: 35%" value="Nome do tamanho" disabled="true"/>
+                                  <h:outputText style="margin-left: 50%;margin-top: 5%; margin-bottom: 5%;" value="Largura:"/> 
+                                  <h:inputText style="width: 50%; margin-left: 35%" value="Nome do tamanho" disabled="true"/>
+                                  <h:outputText style="margin-left: 45%;margin-top: 5%; margin-bottom: 5%;" value="Comprimento"/> 
+                                  <h:inputText style="width: 50%; margin-left: 35%" value="Nome do tamanho" disabled="true"/>
+                                  <h:outputText style="margin-left: 45%;margin-top: 5%; margin-bottom: 5%;" value="Tipo do tamanho:"/> 
+                                  <h:inputText style="width: 50%; margin-left: 35%" value="Nome do tamanho" disabled="true"/>
+                                </b:panelGrid>
+                            </b:panel>
+                          
+                        </c:forEach>
+                        <h:outputText  style="margin-left: 45%;margin-top: 5%; margin-bottom: 5%;" value="Imagem:"/><br/>
+                       <!-- <p:graphicImage value="#produto.imagem}"-->
+                       <b:image value="https://static.netshoes.com.br/produtos/camisa-bahia-2013-sn-masculina/12/D65-1142-012/D65-1142-012_zoom1.jpg" style="width: 50%; margin-left: 28%"/>
+                        </b:panelGrid>
+                            </b:panel>
+                        </c:forEach>
+                    </b:panelGrid>  
+                </b:panel>
+            </c:forEach>
+        </h:form>
+    </h:body>
+</html>
+

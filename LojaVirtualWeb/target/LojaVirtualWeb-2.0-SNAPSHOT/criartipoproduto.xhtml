@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <title>Cadastrar tipo de produto</title>
+    </h:head>
+    <h:body>
+         <b:growl id="gro" delay="4000"/>
+         <b:navBar brand="Bem vindo #{loginController.admLogado.nome}" brandHref="indexAdm.xhtml" inverse="true">
+  <b:navbarLinks>
+    <b:navLink icon-awesome="fa-home" value="Início" href="indexAdm.xhtml"></b:navLink>
+    <b:navLink icon-awesome="fa-list" value="Pedidos" href="pedidosAdm.xhtml"></b:navLink>
+      <b:dropMenu value="Criar" iconAwesome="fa-plus">
+      <b:navLink value= "Tipo de produto" href="criartipoproduto.xhtml"></b:navLink>
+      <b:navLink value="Cor do produto" href="criarcorproduto.xhtml"></b:navLink>
+      <b:navLink value="Tamanho do produto" href="criartamanhoproduto.xhtml"></b:navLink>
+      <b:navLink value="Produto" href="criarproduto.xhtml"></b:navLink></b:dropMenu>
+        
+      <b:navLink iconAwesome="fa-close" style="margin-left: 320px;" value="Sair" href="#"></b:navLink>
+                   
+    </b:navbarLinks>  
+</b:navBar>
+        
+         <b:form id="formtp">
+        <b:panel look="primary" title="Informações do tipo">
+                <b:panelGrid columns="2">
+                   <h:outputText value="Nome do tipo de produto"/>
+                   <b:inputText id="txtNomeRua" value="#{tipoprodutocontroller.tipocadastro.nome}" 
+                                 required="true" maxlength="100"
+                                 required-message="O nome é obrigatório"/>
+                    <b:message for="txtNomeRua"/> 
+                    
+                    
+                </b:panelGrid>
+            <b:commandButton look="primary" style="margin-left: 590px; margin-top: 15px;" value="Registrar" action="#{tipoprodutocontroller.inserirTipoProduto()}"
+                             update="@form :gro"/>
+        </b:panel></b:form>
+    </h:body>
+</html>
+

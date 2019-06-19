@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Menu cliente</title>
+    </h:head>
+  
+    <h:body>
+        <p:growl id="gro" life="3000"/>
+        <b:navBar brand="Bem vindo #{loginController.clienteLogado.nome}" brandHref="indexCliente.xhtml" inverse="true">
+  <b:navbarLinks>
+    <b:navLink icon-awesome="fa-home" value="Início" href="indexCliente.xhtml"></b:navLink>
+  
+  
+    <b:navLink icon-awesome="fa-cart-plus" value="Fazer pedido" href="fazerpedido.xhtml"></b:navLink>
+    <b:navLink iconAwesome="fa-close" style="margin-left: 200px;" value="Sair" href="login.xhtml"></b:navLink>
+  </b:navbarLinks>
+</b:navBar>
+<b:navBar brand="Produtos" fluid="true">
+
+  <b:navbarLinks>
+      <c:forEach  items="#{tipoprodutocontroller.lerTudoTipoProduto()}" var="tipo">
+          <b:navLink value="#{tipo.nome}" ></b:navLink>
+      </c:forEach>
+   
+  </b:navbarLinks>
+</b:navBar>
+  <b:panelGrid columns="4">    
+
+      
+      <c:forEach items="#{produtoController.lerTudo()}" var="produto">         
+          <b:form style="margin-left: 5%">  
+              <b:panel look="primary" title="#{produto.nome}">
+              <b:panelGrid columns="1">
+                 
+            <br/>
+                <h:outputText  style="margin-left:  40%; margin-top: 5%" value="Nome:"/>
+            <h:outputText  style="margin-left:  40%; margin-top: 5%" value="#{produto.nome}"/>
+             <h:outputText  style="margin-left:  40%; margin-top: 5%" value="Quantidade:"/>
+             <h:outputText  style="margin-left:  40%; margin-top: 5%" value="#{produto.quantidade}"/>
+              <h:outputText  style="margin-left:  40%; margin-top: 5%" value="Preço:"/>
+            <h:outputText style="margin-left:  40%; margin-top: 5%" value="#{produto.preco}"/><br/>
+
+          
+        
+           </b:panelGrid>
+                   
+          
+           
+           
+           
+          </b:panel> </b:form>
+      </c:forEach>  
+    
+     
+
+ </b:panelGrid>    
+ </h:body>
+</html>
+
