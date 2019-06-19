@@ -1,0 +1,353 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:b="http://bootsfaces.net/ui"
+           
+       xmlns:p="http://primefaces.org/ui"
+       xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Menu Administrador</title>
+    </h:head>
+    <h:body>
+        <p:growl id="gro" life="3000"/>
+       <b:navBar brand="Bem vindo #administradorController.nomeUsuario}" brandHref="indexAdm.xhtml" inverse="true">
+  <b:navbarLinks>
+    <b:navLink icon-awesome="fa-home" value="Início" href="indexAdm.xhtml"></b:navLink>
+    <b:navLink icon-awesome="fa-list" value="Pedidos" href="pedidosAdm.xhtml"></b:navLink>
+      
+        
+      <b:navLink iconAwesome="fa-close" style="margin-left: 320px;" value="Sair" href="#"></b:navLink>
+                   
+    </b:navbarLinks>  
+</b:navBar>
+        
+        <h:form id="formProd">
+            <b:commandButton style="margin-bottom: 10px;" look="primary" value="Inserir Produto" oncomplete="PF('widDialCadProd').show()"
+                             update=":dialCadProd" />
+            <b:dataTable value="#{administradorController.lerTudoProduto()}" 
+           var="p">
+    <b:dataTableColumn value="#{p.id}"/>     
+    <b:dataTableColumn value="#{p.nome}" />
+    <b:dataTableColumn value="#{p.quantidade}" />
+    <b:dataTableColumn value="#{p.preco}"  />
+    <b:dataTableColumn value="#{p.descricao}"  />
+    <b:dataTableColumn label="Operação"  >
+        <b:commandButton icon="glyphicon-pencil" oncomplete="PF('widDialAltProd').show()"
+                                     update=":dialAltProd" title="alterar">
+        <p:tooltip for="@parent"/>
+        <f:setPropertyActionListener target="#{administradorController.selProd}"
+                                                     value="#{item}"/>
+        </b:commandButton>
+        <b:commandButton icon="fa-trash" action="#{administradorController.deletarProduto()}"
+                                     update="@form">
+        <p:confirm message="Deseja realmente deletar este registro" />
+        <f:setPropertyActionListener target="#{administradorController.selProd}"
+                                                     value="#{item}"/>
+        </b:commandButton>
+        <b:commandButton icon="fa-eye" oncomplete="PF('widDialVisualLog').show()"
+                                     update=":dialVisualLog" title="Visualizar">
+         <p:tooltip for="@parent"/>
+         <f:setPropertyActionListener target="#{administradorController.selProd}"
+                                                     value="#{item}"/>
+         </b:commandButton>
+    </b:dataTableColumn>
+   
+  </b:dataTable>
+        </h:form><br/><br/>
+        
+        <h:form id="formTam">
+            <b:commandButton style="margin-bottom: 10px;" look="primary" value="Inserir Tamanho" oncomplete="PF('widDialCadTam').show()"
+                             update=":dialCadTam" />
+            <b:dataTable value="#{administradorController.lerTudoTamanhoProdutos()}" 
+           var="t">
+    <b:dataTableColumn value="#{t.id}"/>     
+    <b:dataTableColumn value="#{t.nome}" />
+    <b:dataTableColumn value="#{t.altura}" />
+    <b:dataTableColumn value="#{t.largura}"  />
+    <b:dataTableColumn value="#{t.comprimento}"  />
+    <b:dataTableColumn value="#{t.tipo}"  />
+    <b:dataTableColumn label="Operação"  >
+        <b:commandButton icon="glyphicon-pencil" oncomplete="PF('widDialAltTam').show()"
+                                     update=":dialAltTam" title="alterar">
+        <p:tooltip for="@parent"/>
+        <f:setPropertyActionListener target="#{administradorController.selTam}"
+                                                     value="#{item}"/>
+        </b:commandButton>
+        <b:commandButton icon="fa-trash" action="#{administradorController.deletarProduto()}"
+                                     update="@form">
+        <p:confirm message="Deseja realmente deletar este registro" />
+        <f:setPropertyActionListener target="#{administradorController.selTam}"
+                                                     value="#{item}"/>
+        </b:commandButton>
+      
+        
+    </b:dataTableColumn>
+   
+  </b:dataTable>
+        </h:form><br/><br/>
+        <h:form id="formCor">
+            <b:commandButton style="margin-bottom: 10px;" look="primary" value="Inserir Cor" oncomplete="PF('widDialCadCor').show()"
+                             update=":dialCadCor" />
+            <b:dataTable value="#{administradorController.lerTudoCor()}" 
+           var="c">
+    <b:dataTableColumn value="#{c.id}"/>     
+    <b:dataTableColumn value="#{c.nome}" />
+    <b:dataTableColumn value="#{c.tipo}" />
+    
+    <b:dataTableColumn label="Operação"  >
+        <b:commandButton icon="glyphicon-pencil" oncomplete="PF('widDialAltCor').show()"
+                                     update=":dialAltCor" title="alterar">
+        <p:tooltip for="@parent"/>
+        <f:setPropertyActionListener target="#{administradorController.selCor}"
+                                                     value="#{item}"/>
+        </b:commandButton>
+        <b:commandButton icon="fa-trash" action="#{administradorController.deletarCor()}"
+                                     update="@form">
+        <p:confirm message="Deseja realmente deletar este registro" />
+        <f:setPropertyActionListener target="#{administradorController.selCor}"
+                                                     value="#{item}"/>
+        </b:commandButton>
+       
+    </b:dataTableColumn>
+   
+  </b:dataTable>
+        </h:form><br/><br/>
+        
+        <h:form id="formTP">
+            <b:commandButton style="margin-bottom: 10px;" look="primary" value="Inserir tipo de produto" oncomplete="PF('widDialCadTP').show()"
+                             update=":dialCadTP" />
+            <b:dataTable value="#{administradorController.lerTudoTipoProduto()}" 
+           var="tp">
+    <b:dataTableColumn value="#{tp.id}"/>     
+    <b:dataTableColumn value="#{tp.nome}" />
+   
+    <b:dataTableColumn label="Operação"  >
+        <b:commandButton icon="glyphicon-pencil" oncomplete="PF('widDialAltTP').show()"
+                                     update=":dialAltTP" title="alterar">
+        <p:tooltip for="@parent"/>
+        <f:setPropertyActionListener target="#{administradorController.selTP}"
+                                                     value="#{item}"/>
+        </b:commandButton>
+        <b:commandButton icon="fa-trash" action="#{administradorController.deletar()}"
+                                     update="@form">
+        <p:confirm message="Deseja realmente deletar este registro" />
+        <f:setPropertyActionListener target="#{administradorController.selTP}"
+                                                     value="#{item}"/>
+        </b:commandButton>
+        
+    </b:dataTableColumn>
+   
+  </b:dataTable>
+        </h:form><br/><br/> 
+        
+        
+        
+        <p:dialog id="dialCadProd" style="width: 80%; height: 80%;" visible="false" modal="true" widgetVar="widDialCadProd">
+            <h:form style="width: 80%; height: 80%"> 
+                <b:panelGrid columns="2" >
+                    
+                    <h:outputText value="Nome do Produto"/>
+                    <p:inputText value="#{AdministradorController.ProdutoCadastro.nome}"/>
+                    
+                    <h:outputText value="Descrição"/>
+                    <p:inputText value="#{AdministradorController.ProdutoCadastro.descricao}"/>
+                    
+                    <h:outputText value="Tipo do produto"/>
+                    <b:selectOneMenu value="#{AdministradorController.ProdutoCadastro.tipoProduto}" required="true"  >
+                    
+                    <f:selectItems value="#{Tipoproduto.nome}" var="c" itemValue="#{c}" />
+     </b:selectOneMenu>
+                    
+                    <h:outputText value="Preço"/>
+                    <p:inputText value="#{AdministradorController.ProdutoCadastro.preco}"/>
+                    
+                    <h:outputText value="Quantidade"/>
+                    <p:inputText value="#{AdministradorController.ProdutoCadastro.quantidade}"/>
+                    
+                    <h:outputText value="Tamanho"/>
+                    <b:selectMultiMenu value="#{Administrador.ProdutoTamanhoCadastro}" id="TamanhoID" required="true">
+                    <f:selectItems value="#{Administrador.tamanho.id}" var="c" itemValue="#{c}" itemLabel="#{c.nome}"/>
+                    </b:selectMultiMenu>
+                    <h:outputText value="Cor"/>
+                    <b:selectMultiMenu value="#{Administrador.ProdutoCorCadastro}" id="CorID" required="true">
+                    <f:selectItems value="#{Administrador.cor.id}" var="c" itemValue="#{c}" itemLabel="#{c.nome}"/>
+                    </b:selectMultiMenu>
+                    <h:outputText value="Imagem"/>
+                    <h:inputFile value="#{AdministradorController.ProdutoCadastro.imagem}"/>
+                   
+                </b:panelGrid>
+                <b:commandButton style="margin-left:150px; margin-top: 20px" look="primary" value="Inserir" action="#{Administrador.inserirProd()}"
+                                 oncomplete="PF('widDialCadProd').hide()"
+                                 update=":formProd :gro">
+                    <p:confirm header="Cadastro" message="Deseja realmente Cadastrar esse registro"/>
+                </b:commandButton>
+                
+                 <p:dialog id="dialAltProd" visible="false" modal="true" widgetVar="widDialAltProd">
+            <h:form>
+                <b:panelGrid columns="2">
+                    
+                    <h:outputText value="Nome do Produto"/>
+                    <p:inputText value="#{AdministradorController.selProd.nome}"/>
+                    
+                    <h:outputText value="Descrição"/>
+                    <p:inputText value="#{AdministradorController.selProd.descricao}"/>
+                    
+                    <h:outputText value="Tipo do produto"/>
+                    <b:selectOneMenu value="#{AdministradorController.selProd.tipoProduto}" required="true"  >
+                    
+                    <f:selectItems value="#{Tipoproduto.nome}" var="c" itemValue="#{c}" />
+     </b:selectOneMenu>
+                    
+                    <h:outputText value="Preço"/>
+                    <p:inputText value="#{AdministradorController.selProd.preco}"/>
+                    
+                    <h:outputText value="Quantidade"/>
+                    <p:inputText value="#{AdministradorController.selProd.quantidade}"/>
+                    
+                    <h:outputText value="Tamanho"/>
+                    <b:selectMultiMenu value="#{Administrador.ProdutoTamanhoSel}" id="TamanhoID" required="true">
+                    <f:selectItems value="#{Administrador.tamanho.id}" var="c" itemValue="#{c}" itemLabel="#{c.nome}"/>
+                    </b:selectMultiMenu>
+                    <h:outputText value="Cor"/>
+                    <b:selectMultiMenu value="#{Administrador.ProdutoCorSel}" id="CorID" required="true">
+                    <f:selectItems value="#{Administrador.cor.id}" var="c" itemValue="#{c}" itemLabel="#{c.nome}"/>
+                    </b:selectMultiMenu>
+                    <h:outputText value="Imagem"/>
+                    <h:inputFile value="#{AdministradorController.selProd.imagem}"/>
+                </b:panelGrid>
+                <p:commandButton value="Alterar" action="#{AdministradorController.alterar()}"
+                                 oncomplete="PF('widDialAltProd').hide()"
+                                 update=":formProd :gro"/>
+            </h:form>        </p:dialog>
+        
+        <p:confirmDialog global="true" visible="false">
+            <h:form>
+                <p:commandButton value="sim" styleClass="ui-confirmdialog-yes"/>
+                <p:commandButton value="nao" styleClass="ui-confirmdialog-no"/>
+            </h:form>        </p:confirmDialog>            </h:form>        </p:dialog>
+        
+        
+        
+        <p:dialog id="dialCadTam" style="width: 80%; height: 80%;" visible="false" modal="true" widgetVar="widDialCadTam">
+            <h:form style="width: 80%; height: 80%"> 
+                <b:panelGrid columns="2" >
+                    
+                    <h:outputText value="Nome do tamanho"/>
+                    <p:inputText value="#{AdministradorController.TamanhoCadastro.nome}"/>
+                    
+                    <h:outputText value="Altura"/>
+                    <p:inputText value="#{AdministradorController.TamanhoCadastro.altura}"/>
+                    
+                    <h:outputText value="Largura"/>
+                    <p:inputText value="#{AdministradorController.TamanhoCadastro.largura}"/>
+                    
+                    <h:outputText value="Comprimento"/>
+                    <p:inputText value="#{AdministradorController.TamanhoCadastro.comprimento}"/>
+                    
+                    <h:outputText value="Tipo"/>
+                    <p:inputText value="#{AdministradorController.TamanhoCadastro.tipo}"/>
+                    
+                    
+                </b:panelGrid>
+                <b:commandButton style="margin-left:150px; margin-top: 20px" look="primary" value="Inserir" action="#{Administrador.inserirTamanho()}"
+                                 oncomplete="PF('widDialCadTam').hide()"
+                                 update="formTam :gro">
+                    <p:confirm header="Cadastro" message="Deseja realmente Cadastrar esse registro"/>
+                </b:commandButton></h:form></p:dialog>
+        
+        <p:dialog id="dialCadCor" style="width: 80%; height: 80%;" visible="false" modal="true" widgetVar="widDialCadCor">
+            <h:form style="width: 80%; height: 80%"> 
+                <b:panelGrid columns="2" >
+                    
+                    <h:outputText value="Nome da cor"/>
+                    <p:inputText value="#{AdministradorController.CorCadastro.nome}"/>
+                    
+                    <h:outputText value="Tipo"/>
+                    <p:inputText value="#{AdministradorController.CorCadastro.tipo}"/>
+                    
+                  
+                    
+                    
+                </b:panelGrid>
+                <b:commandButton style="margin-left:150px; margin-top: 20px" look="primary" value="Inserir" action="#{administradorController.inserirCor(corCadastro)}"
+                                 oncomplete="PF('widDialCadCor').hide()"
+                                 update="formCor :gro">
+                    <p:confirm header="Cadastro" message="Deseja realmente Cadastrar esse registro"/>
+                </b:commandButton></h:form></p:dialog>
+                <p:dialog id="dialCadTP" style="width: 80%; height: 80%;" visible="false" modal="true" widgetVar="widDialCadTP">
+            <h:form style="width: 80%; height: 80%"> 
+                <b:panelGrid columns="2" >
+                    
+                  
+                    
+                    <h:outputText value="Nome do tipo produto"/>
+                    <p:inputText value="#{AdministradorController.tipoProduto.nome}"/>
+                    
+                  
+                    
+                    
+                </b:panelGrid>
+                <b:commandButton style="margin-left:150px; margin-top: 20px" look="primary" value="Inserir" action="#{administradorController.inserirTipoProduto()}"
+                                 oncomplete="PF('widDialCadTP').hide()"
+                                 update="formTP :gro">
+                    <p:confirm header="Cadastro" message="Deseja realmente Cadastrar esse registro"/>
+                </b:commandButton></h:form></p:dialog>
+
+        <p:dialog id="dialAltTam" visible="false" modal="true" widgetVar="widDialAltTam">
+            <h:form>
+                <b:panelGrid columns="2">
+                    
+                    <h:outputText value="Nome do Produto"/>
+                    <p:inputText value="#{AdministradorController.selProd.nome}"/>
+                    
+                    <h:outputText value="Descrição"/>
+                    <p:inputText value="#{AdministradorController.selProd.descricao}"/>
+                    
+                    <h:outputText value="Tipo do produto"/>
+                    <b:selectOneMenu value="#{AdministradorController.selProd.tipoProduto}" required="true"  >
+                    
+                    <f:selectItems value="#{Tipoproduto.nome}" var="c" itemValue="#{c}" />
+     </b:selectOneMenu>
+                    
+                    <h:outputText value="Nome do tamanho"/>
+                    <p:inputText value="#{AdministradorController.selTamanho.nome}"/>
+                    
+                    <h:outputText value="Altura"/>
+                    <p:inputText value="#{AdministradorController.selTamanho.altura}"/>
+                    
+                    <h:outputText value="Largura"/>
+                    <p:inputText value="#{AdministradorController.selTamanho.largura}"/>
+                    
+                    <h:outputText value="Comprimento"/>
+                    <p:inputText value="#{AdministradorController.selTamanho.comprimento}"/>
+                    
+                    <h:outputText value="Tipo"/>
+                    <p:inputText value="#{AdministradorController.selTamanho.tipo}"/>
+                </b:panelGrid>
+                <p:commandButton value="Alterar" action="#{AdministradorController.alterar()}"
+                                 oncomplete="PF('widDialAltTam').hide()"
+                                 update=":formTam :gro"/>
+            </h:form>        </p:dialog>
+        
+        <p:dialog id="dialAltCor" visible="false" modal="true" widgetVar="widDialAltCor">
+            <h:form>
+                <b:panelGrid columns="2">
+                    
+                    <h:outputText value="Nome da cor"/>
+                    <p:inputText value="#{AdministradorController.selCor.nome}"/>
+                    
+                    <h:outputText value="Descrição"/>
+                    <p:inputText value="#{AdministradorController.selCor.tipo}"/>
+                    
+                   
+                </b:panelGrid>
+                <p:commandButton value="Alterar" action="#{AdministradorController.alterar()}"
+                                 oncomplete="PF('widDialAltCor').hide()"
+                                 update=":formCor :gro"/>
+            </h:form>        </p:dialog>
+        
+        
+    </h:body>
+</html>
+

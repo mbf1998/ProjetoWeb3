@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Meu carrinho</title>
+    </h:head>
+    <h:body>
+        <p:growl id="gro" life="3000"/>
+  <b:navBar brand="Bem vindo Fulano" brandHref="indexCliente.xhtml" inverse="true">
+  <b:navbarLinks>
+    <b:navLink icon-awesome="fa-home" value="Início" href="indexCliente.xhtml"></b:navLink>
+    <b:navLink icon-awesome="fa-list" value="Meus pedidos" href="meusPedidos.xhtml"></b:navLink>
+    <b:navLink icon-awesome="fa-edit" value="Editar perfil" href="editarPerfil.xhtml"></b:navLink>
+    <b:navLink icon-awesome="fa-cart-plus" value="Meu carrinho" href="meuCarrinho.xhtml"></b:navLink>
+    <b:navLink iconAwesome="fa-close" style="margin-left: 200px;" value="Sair" href="#"></b:navLink>
+  </b:navbarLinks>
+</b:navBar>
+<br/>
+<h:form id="formCarrinho">
+    <b:panelGrid columns="1" style="width: 50%; margin-left: 20%">
+         <b:dataTable value="#{clienteProduto.listaProdutos}" 
+           var="produtos">
+             <b:dataTableColumn value="#{produtos.nome}" order="asc"><b:link style-class="some-class" onclick="#{clienteProduto.mostrarProduto(produto.id)};" value="Click this link to show an alert box." />
+    </b:dataTableColumn>    
+  
+    <b:dataTableColumn value="#{produtos.quantidade}" order="asc" />
+     <b:dataTableColumn value="#{produtos.preco}"  />
+    
+    <b:dataTableColumn label="Operação"  >
+        
+        <b:commandButton icon="fa-trash" action="#{administradorController.deletarProduto()}"
+                                     update="@form">
+        <p:confirm message="Deseja realmente deletar este registro" />
+        <f:setPropertyActionListener target="#{administradorController.selProd}"
+                                                     value="#{item}"/>
+        </b:commandButton>
+       
+        
+  
+    </b:dataTableColumn>
+    
+  </b:dataTable><br/>
+    
+    </b:panelGrid>
+    <b:panelGrid columns="1" style="margin-left: 40%;margin-top: 10%">
+      <b:commandButton value="Confirmar compra" look="success"/>   
+    </b:panelGrid>
+   
+        </h:form>
+    </h:body>
+</html>
+

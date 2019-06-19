@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Loja Virtual</title>
+    </h:head>
+    <h:body>
+        <p:growl id="gro" life="3000"/>
+        <b:navBar brand="Bem vindo, visitante!" inverse="true">
+            <b:navbarLinks>
+                <b:navLink icon-awesome="fa-home" value="Início" href="faces/indexPublico.xhtml"></b:navLink>
+                <b:navLink icon-awesome="fa-plus" value="Cadastrar" href="faces/registrarCliente.xhtml"></b:navLink>
+            </b:navbarLinks>
+        </b:navBar>
+
+        <b:panelGrid columns="4">    
+
+
+            <c:forEach begin="1" items="#{produtoController.lerTudo()}" var="produto">         
+                <b:form>  
+                    <b:panel look="primary" title="Nome do produto">
+                        <b:panelGrid columns="1">
+                            <b:image value="https://static.netshoes.com.br/produtos/camisa-bahia-2013-sn-masculina/12/D65-1142-012/D65-1142-012_zoom1.jpg" style="width: 50%; margin-left: 28%"/>
+                            <br/>
+                            <h:outputText style="margin-left: 30%;margin-top: 5%" value="#{produto.nome}"/>
+                            <h:outputText style="margin-left:  45%; margin-top: 5%" value="#{produto.preco}"/><br/>
+
+                            <b:selectOneMenu style="width: 700%;" value="#{produto.cor}"  colMd="3" required="true">
+                                <f:selectItems value="#produtoController.lerCores(produto.id)}" var="c" itemValue="#{c.nome}" />
+                            </b:selectOneMenu> <br/>
+                            <b:selectOneMenu style="width: 700%;" value="#{produto.tamanho}"  colMd="3" required="true">
+                                <f:selectItems value="#{produto.tamanho}" var="d" itemValue="#{produto.tamanho}" itemLabel="Nome da Cor"/>
+                            </b:selectOneMenu> <br/>
+                            <b:panelGrid columns="1" style="margin-left: 25%">
+
+                                <b:commandButton value="Mais detalhes"  look="danger" />     
+                            </b:panelGrid>
+                        </b:panelGrid>
+
+
+
+
+
+                    </b:panel> </b:form>
+            </c:forEach>  
+
+
+
+        </b:panelGrid>
+    </h:body>
+</html>
+
