@@ -9,30 +9,26 @@
         <title>Login</title>
     </h:head>
     <h:body>
-        <c:if test="#{login.pessoaLogada!= null}">
-            <script>
-                location.href = "faces/publico/login.xhtml";
-            </script>
-        </c:if>
+       
+       
         <div align="center">
             <h:form><br/><br/><br/>
                 <p:panelGrid columns="2"  >
 
                     <h:outputText value="Email"/>
-                    <b:inputText value="#{email}"/>
+                    <b:inputText value="#{loginController.email}"/>
 
                     <h:outputText value="Senha"/>
-                    <b:inputSecret value="#{senha}"
+                    <b:inputSecret value="#{loginController.senha}"
                                    />
 
 
                 </p:panelGrid><br/>
 
-                <b:commandButton style="margin-right: 15px; margin-left: 20px" look="primary" value="Logar Cliente" size="lg" action="#{loginController.realizarLoginCliente(email, senha)}"
-                                 />
-                <b:commandButton style="margin-right: 15px; margin-left: 20px" look="primary" value="Logar ADM" size="lg" action="#{loginController.realizarLoginAdm(email, senha)}"
-                                 />
-
+                <b:commandButton style="margin-right: 15px; margin-left: 20px" look="primary" value="Logar Cliente" size="lg" action="#{loginController.realizarLoginCliente(loginController.email,loginController.senha)}"/>
+                                 
+               
+                
 
              
               

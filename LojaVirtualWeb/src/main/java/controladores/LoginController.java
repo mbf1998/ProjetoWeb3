@@ -82,8 +82,11 @@ public class LoginController {
         } catch (IndexOutOfBoundsException in) {
             FacesContext.getCurrentInstance().addMessage("",
                     new FacesMessage("Bem vindo "+admLogado.getNome()));
+             return "indexAdm.xhtml";
         } catch (Exception e) {
-           
+            FacesContext.getCurrentInstance().addMessage("",
+                    new FacesMessage("Bem vindo "+admLogado.getNome()));
+             return "indexAdm.xhtml";
         }
         
         return "indexAdm.xhtml";
@@ -107,10 +110,10 @@ public class LoginController {
             
         } catch (IndexOutOfBoundsException in) {
             FacesContext.getCurrentInstance().addMessage("",
-                    new FacesMessage("login e/ou senha incorretos"));
+                    new FacesMessage("Bem vindo"));
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage("",
-                    new FacesMessage("fudeu... eu não sei o que aconteceu"));
+                    new FacesMessage("eu não sei o que aconteceu"));
         }
         
         return "indexCliente.xhtml";
